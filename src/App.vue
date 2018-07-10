@@ -4,25 +4,41 @@
     hr.bt.b--moon-gray
     div.mb5
       template(v-for='(todo, i) in todos')
-        pre {{todo}}
-        //- TODO:
-    template(v-if="todos.filter((todo) => todo.status === 'archived').length")
+        Todo(v-bind:todo='todo')
+
+    input(placeholder="New Todo" v-on:keyup.enter="addTodo($event)").br2
+
+    template(v-if='archivedTodos.length > 0')
       h1.tc.f5.fw5.ttu.tracked Archived Todos
       hr.bt.b--moon-gray
       div.mb5
-        template(v-for='(todo, i) in todos')
-          //- TODO:
+      template(v-for='(todo, i) in archivedTodos')
+        Todo(v-bind:todo='todo')
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
+
+import Todo from './components/Todo'
 
 export default {
-  components: {},
+  components: {
+    Todo
+  },
   data: () => ({}),
   computed: {
-    ...mapState(['todos'])
+    ...mapGetters([
+      'todos',
+      'archivedTodos'
+    ])
   },
-  methods: {}
+  methods: {
+    addTodo (event) {
+      const title = event.target.value
+      //  clear input value
+      event.target.value = ''
+      this.$store.commit('addTodo', { title })
+    }
+  }
 }
 </script>

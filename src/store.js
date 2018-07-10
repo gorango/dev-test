@@ -9,7 +9,7 @@ export default new Vuex.Store({
       id: 0,
       title: 'One',
       complete: false,
-      archived: true
+      archived: false
     }]
   },
   mutations: {
@@ -18,7 +18,7 @@ export default new Vuex.Store({
         title,
         id: state.todos.length + 1,
         complete: false,
-        archived: true
+        archived: false
       }
       state.todos = [...state.todos, todo]
     },
@@ -35,6 +35,7 @@ export default new Vuex.Store({
       })
     },
     delete (state, { id }) {
+      console.log('delete', id)
       state.todos = state.todos.filter(todo => todo.id !== id)
     }
   },
@@ -46,5 +47,12 @@ export default new Vuex.Store({
       return state.todos.filter(todo => todo.archived)
     }
   },
-  actions: {}
+  actions: {
+    handleCloseClick ({ commit }, { id, archived }) {
+      console.log('handleCloseClick isArchived:', archived, id)
+      commit('delete', id)
+      if (archived) commit('delete', { id })
+      else commit('archive', { id })
+    }
+  }
 })
