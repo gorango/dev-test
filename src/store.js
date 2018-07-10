@@ -35,7 +35,6 @@ export default new Vuex.Store({
       })
     },
     delete (state, { id }) {
-      console.log('delete', id)
       state.todos = state.todos.filter(todo => todo.id !== id)
     }
   },
@@ -49,8 +48,6 @@ export default new Vuex.Store({
   },
   actions: {
     handleCloseClick ({ commit }, { id, archived }) {
-      console.log('handleCloseClick isArchived:', archived, id)
-      commit('delete', id)
       if (archived) commit('delete', { id })
       else commit('archive', { id })
     }

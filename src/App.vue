@@ -6,7 +6,7 @@
       template(v-for='(todo, i) in todos')
         Todo(v-bind:todo='todo')
 
-    input(placeholder="New Todo" v-on:keyup.enter="addTodo($event)").w-100.pa1.br1.input-reset.b--moon-gray.ba.bw1.f5.border-box
+    input(placeholder="New Todo" v-on:keyup.enter="addTodo($event)").w-100.border-box.pa1.br1.b--moon-gray.ba.bw1.f5
 
     template(v-if='archivedTodos.length > 0')
       div.mb5
