@@ -1,11 +1,11 @@
 <template lang="pug">
-  div.flex.justify-between.shadow-1.avenir.br2.noselect
-    div(v-on:click="toggleComplete").flex.items-center.w-100-l
+  div.flex.pa1.justify-between.shadow-3.br2.noselect.border-box.mb3
+    div(v-on:click="toggleComplete").flex.items-center.w-100
       input(type="checkbox" v-model="todo.complete").ml2
-      div.relative.ml2.w-100-l
+      div.relative.ml2.w-100
         div {{todo.title}}
         div(v-bind:class="{ activeStrikeThrough: todo.complete }")
-    div(v-on:click="handleCloseClick").rotate-45.f1.mr2.clickable +
+    div(v-on:click="handleCloseClick").rotate-45.f3.mr2.clickable +
 </template>
 
 <script>
@@ -30,7 +30,7 @@ export default {
   }
 }
 </script>
-z
+
 <style scoped>
 .noselect {
   user-select: none;
@@ -39,12 +39,13 @@ z
   cursor: pointer;
 }
 .activeStrikeThrough{
-  border-bottom: 3px solid #000;
+  border-bottom: 2px solid #000;
   content: "";
   line-height: 1em;
-  left: 0;
   position: absolute;
-  right: 0;
-  top: calc(50% - 3px);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
 }
 </style>

@@ -1,17 +1,17 @@
 <template lang='pug'>
-  section.mt6.mw5.center.w-100
+  section.mt6.mw5.center.w-100.avenir
     h1.tc.f3.fw7.ttu.tracked Todos
     hr.bt.b--moon-gray
-    div.mb5
+    div.mb2
       template(v-for='(todo, i) in todos')
         Todo(v-bind:todo='todo')
 
-    input(placeholder="New Todo" v-on:keyup.enter="addTodo($event)").br2
+    input(placeholder="New Todo" v-on:keyup.enter="addTodo($event)").w-100.pa1.br1.input-reset.b--moon-gray.ba.bw1.f5.border-box
 
     template(v-if='archivedTodos.length > 0')
+      div.mb5
       h1.tc.f5.fw5.ttu.tracked Archived Todos
       hr.bt.b--moon-gray
-      div.mb5
       template(v-for='(todo, i) in archivedTodos')
         Todo(v-bind:todo='todo')
 </template>
@@ -35,9 +35,12 @@ export default {
   methods: {
     addTodo (event) {
       const title = event.target.value
-      //  clear input value
-      event.target.value = ''
-      this.$store.commit('addTodo', { title })
+      //  do nothing for empty todo
+      if (title) {
+        //  clear input value
+        event.target.value = ''
+        this.$store.commit('addTodo', { title })
+      }
     }
   }
 }
